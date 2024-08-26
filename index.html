@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈 화면</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"
+        integrity="sha512-HX+/SvM7094YZEKOCtG9EyjRYvK8dKlFhdYAnVCGNxMkA59BZNSZTZrqdDlLXp0O6/NjDb1uKnmutUeuzHb3iQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!-- 데이터 변환 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"
+        integrity="sha512-HX+/SvM7094YZEKOCtG9EyjRYvK8dKlFhdYAnVCGNxMkA59BZNSZTZrqdDlLXp0O6/NjDb1uKnmutUeuzHb3iQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- contianer,menu의 css  -->
+    <link rel="stylesheet" href="./resources/css/basic.css">
+
+    <!-- 부트스트랩 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+
+    
+
+    <style>
+
+
+
+        .btnBox {
+            height: 17%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        
+        }
+
+        .dataLoad {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+        
+
+            
+        }
+
+
+        .showInfo {
+            height: 10%;
+            display: flex;
+            justify-content: end;
+
+        }
+
+        .nomalBtn {
+            width: 50%;
+            height: 60%;
+            font-size: 25px;
+            cursor: pointer;
+
+            background-color: #52616a;
+            color: #f0f5f9;
+            border-radius: 10px;
+        }
+        .dataBtn{
+            width: 70%;
+            height: 70%;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+
+            background-color: #1e2022 ;
+            color: #f0f5f9;
+            border-radius: 10px;
+        }
+
+        .refresh{
+            color:#02446d ;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .nowBtn {
+            width: 60%;
+            height: 70%;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+
+            background-color: #1e2022 ;
+            color: #f0f5f9;
+
+            border-radius: 10px;
+            
+        }
+
+        .infoBtn {
+            cursor: pointer; 
+            width: 20%;
+            height: 40%;
+        }
+
+
+
+    </style>
+
+
+
+
+
+</head>
+
+<body>
+    <div class="outliner"><!-- 최외곽 -->
+
+        <div class="navigation"><!-- navigation -->
+            <div>
+                대전 실시간 주차장 정보 검색
+            </div>
+        </div><!-- navigation -->
+
+        <div class="menu"><!-- menu -->
+            <div class="menuBtn">홈으로</div>
+            <div class="menuList"><!-- menuList -->
+                <div class="menuItem" onclick="f_reqData()">데이터갱신</div>
+                <div class="menuItem nowParking"> 오늘 운영 <br>주차장 </div>
+                <div class="menuItem moreSearch">상세 검색</div>
+                <div class="menuItem gotoMap">지도로<br> 한눈에</div>
+                <div class="menuItem gotoStatic">통계와 <br>그래프</div>
+                <div class="menuItem gotoInfo"> 사이트정보 <br> 사용가이드 </div>
+                
+
+            </div><!-- menuList -->
+        </div><!-- menu -->
+
+
+        <div class="container"> <!-- container -->
+            <div class="dataLoad btnBox"><!-- dataLoad -->
+                <button class="dataBtn " onclick="f_reqData()" title="구별 조회 가능 ">
+                    최신 주차장 데이터 갱신</button>
+                <div class="refresh">데이터 로딩 후 새로고침</div>
+            </div><!-- dataLoad -->
+
+            <div class="nowParking btnBox"><!--nowParking -->
+                <button class="nowBtn">오늘 운영하는 주차장</button>
+
+            </div><!--nowParking -->
+
+            <div class="moreSearch btnBox "><!--moreSearch -->
+                <button class="moreBtn nomalBtn" title="지역별, 유무료, 운영일별 상세 검색 "> 운영일, 유무료, 지역별 검색 </button>
+            </div><!--moreSearch -->
+
+
+            <div class="gotoMap btnBox"><!--gotoMap -->
+                <button class="mapBtn nomalBtn"> 지도로 한눈에 보기 </button>
+            </div><!--gotoMap -->
+
+            <div class="gotoStatic btnBox"><!--gotoStatic -->
+                <button class="staticBtn nomalBtn">주차장 그래프로 보기(통계)</button>
+            </div><!--gotoStatic -->
+
+            <div class="showInfo btnBox"><!--showInfo -->
+                <button class="infoBtn gotoInfo">데이터 정보, 제작 정보 </button>
+            </div><!--showInfo -->
+
+        </div><!-- container -->
+        <!-- 데이터 로딩시 프로그레스 박스  -->
+        <div class="progress-box"><!-- progress-box -->
+            <div> <br> 데이터 수신에 시간이 소요될 수 있습니다. 기다려주십시오. <br>
+                    로딩이 완료된 후 새로고침해야 정상반영됩니다.
+            </div>
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden"></span>
+            
+            </div>
+        </div><!-- progress-box -->
+
+    </div><!-- 최외곽 -->
+
+    <script src="./resources/js/gettime.js"></script>
+    <script src="./resources/js/requestData.js"></script>
+    <script src="./resources/js/gotoBtn.js"></script>
+
+    <script src="./resources/js/v_item.js"></script>
+
+    <!-- 부트스트랩 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+    <script>
+        console.log(v_array.length)
+        console.log(v_item.length);
+
+    
+    
+    
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>

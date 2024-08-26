@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js" integrity="sha512-HX+/SvM7094YZEKOCtG9EyjRYvK8dKlFhdYAnVCGNxMkA59BZNSZTZrqdDlLXp0O6/NjDb1uKnmutUeuzHb3iQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+    <!-- 데이터 변환 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"
+        integrity="sha512-HX+/SvM7094YZEKOCtG9EyjRYvK8dKlFhdYAnVCGNxMkA59BZNSZTZrqdDlLXp0O6/NjDb1uKnmutUeuzHb3iQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- contianer,menu의 css  -->
+    <link rel="stylesheet" href="./resources/css/basic.css">
+
+        <!-- 부트스트랩 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+
+    <style>
+        
+        .guideBox{
+            background-color: wheat ;
+            width: 80%;
+            height: 47%;
+            margin-left: 15%;
+            margin-bottom: 2%;
+            padding: 2%;
+        
+        }
+
+        .aboutDataBox{
+            background-color: wheat ;
+            width: 80%;
+            height: 47%;
+            margin-left: 15%;
+            padding: 2%;
+        }
+
+    </style>
+
+
+
+
+    
+</head>
+<body>
+
+
+    <div class="outliner"><!-- 최외곽 -->
+
+        <div class="outliner"><!-- 최외곽 -->
+
+            <div class="navigation"><!-- navigation -->
+                <div>
+                    대전 실시간 주차장 정보 검색
+                </div>
+            </div><!-- navigation -->
+
+            <div class="menu"><!-- menu -->
+                <div class="menuBtn">홈으로</div>
+                <div class="menuList"><!-- menuList -->
+                    <div class="menuItem" onclick="f_reqData()">데이터갱신</div>
+                    <div class="menuItem nowParking"> 오늘 운영 <br>주차장 </div>
+                    <div class="menuItem moreSearch">상세 검색</div>
+                    <div class="menuItem gotoMap">지도로<br> 한눈에</div>
+                    <div class="menuItem gotoStatic">통계와 <br>그래프</div>
+                    <div class="menuItem gotoInfo"> 사이트정보 <br> 사용가이드 </div>
+                    
+    
+                </div><!-- menuList -->
+            </div><!-- menu -->
+    
+
+
+
+            <div class="container"> <!-- container -->
+                <div class="guideBox"><!-- guideBox -->
+                    1. 데이터 갱신 <br>
+                    [홈 화면 :최신 주차장 데이터 갱신 ] <br>
+                    [메뉴 버튼 : 데이터 갱신 ]
+                    <br>
+                    <br>
+
+                    2. 주차장 검색 <br>
+                    [홈 화면 : 오늘 운영하는 주차장 / 운영일,유무료, 지역별 검색 ]<br>
+                    [메뉴 버튼 : 오늘 운영 주차장 / 상세 검색 ]
+
+                    <br>
+                    <br>
+
+
+                    3. 통계, 현황<br>
+                    [홈 화면 : 지도로  한눈에 보기 / 주차장 그래프로 보기(통계)]<br>
+                    [메뉴 버튼 : 지도로 한눈에 / 통계와 그래프]
+                    <br>
+                    <br>
+                </div><!-- guideBox -->
+                <div class="aboutDataBox"><!-- aboutDataBox -->
+                    <대전시 주차장 데이터 출처> 
+                    <br> 공공데이터 포탈 
+                    <br>대전광역시_실시간 주차장 정보 (https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15083717)
+                    <br> <br><개발 및 배포>
+                    <br>[계룡건설] 빅데이터 기반 Green Tech SW개발자(6회차) 개인 실습 과제 
+                    <br>개발 기간 : 24.8.19 ~ 24.8.25
+                    <br>배포일 : 24.8.26.
+                    <br> 배포 주소:
+                    <br> 
+                </div><!-- aboutDataBox -->
+
+
+            </div><!-- container -->
+    <!-- 데이터 로딩시 프로그레스 박스  -->
+    <div class="progress-box"><!-- progress-box -->
+        <div> <br> 데이터 수신에 시간이 소요될 수 있습니다. 기다려주십시오. <br>
+            로딩이 완료된 후 새로고침해야 정상반영됩니다.
+        </div>
+        <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden"></span>
+        </div>
+    </div><!-- progress-box -->
+
+        </div><!-- 최외곽 -->
+
+        
+        <!-- 시간, 요일 불러오는 함수  -->
+        <script src="./resources/js/gettime.js"></script>
+
+        <!-- 데이터 불러오기 -->
+        <script src="./resources/js/requestData.js"></script>
+
+        <!-- 불러온 데이터를 item만 꺼내서담기 -->
+        <script src="./resources/js/v_item.js"></script>
+
+        <!-- 메뉴 버튼의클릭이벤트-->
+        <script src="./resources/js/gotoBtn.js"></script>
+</body>
+</body>
+</html>

@@ -1,0 +1,216 @@
+/* outliner, menu, navigation 등 공통으로 사용되는 css 정리 */
+*{
+    border: 0px grey solid;
+    margin: 0;
+    padding: 0;
+    border-radius: 3px;
+}
+
+.outliner{
+    /* height: 800px; */
+    
+    position: relative;
+    height: 100vh;
+
+    background-color: #f0f5f9;
+}
+
+@media (max-width:600px) {
+    .navigation{
+        font-size: 10px;
+    }
+    
+    
+    .menuBtn{
+        font-size: 12.5px;
+        border-radius:5px ;  
+    }
+    
+    
+    .menuItem{
+        font-size: 7.5px;
+    }
+    
+        
+}
+
+@media (max-width:300px) {
+    .navigation{
+        font-size: 20px;
+    }
+    
+    
+    .menuBtn{
+        font-size: 12.5px;
+        border-radius:5px ;  
+    }
+    
+    
+    .menuItem{
+        font-size: 7.5px;
+    }
+    
+    
+}
+
+
+.navigation{
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+
+    background-color: #f0f5f9;
+    color: #1e2022 ;
+    font-weight: bold;
+}
+
+.menu{
+    width: 10%;
+    height: 90%;
+
+    position: absolute;
+    left: 2%;
+    top : 2%;
+
+    display: flex;
+    justify-content: center;
+
+    /* background-color: #c9d6de; */
+    
+        
+}
+
+.menuBtn{
+    background-color: #52616a;
+    cursor:pointer;
+    width: 100%;
+    height: 10%;
+    margin-bottom: 10%;
+  padding-top: 10%;
+    text-align: center;
+    
+    color:#f0f5f9;
+    font-size: 25px;
+    font-weight: bold;
+
+    border-radius:5px ;
+
+    
+    
+}
+
+.menuList{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    /* background-color:darkgray; */
+    position: absolute;
+    top: 0;
+    left: 5%;
+
+    /* 자신의 가로너비만큼 왼쪽으로 이동 */
+    transform: translate(0, 20%);
+    transition-duration: 1s;
+
+    width: 90%;
+    height: 60%;
+}
+
+.menuItem{
+    padding: 5px;
+    width: 90%;
+    height: 30%;
+    cursor:pointer;
+
+    background-color: white ;
+    color: #52616a;
+    font-weight: bold;
+    font-size: 15px;
+
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 1%;
+    margin-right: 1%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px solid #52616a;
+    border-radius: 5px;
+    
+
+
+    
+}
+
+
+
+/* index제외한 다른 페이지는 flex주기  */
+.container{
+    height: 90%;
+    background-color: #f0f5f9;
+
+
+}
+
+.progress-box{
+    width: 50%;
+    height: 50%;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border: 1px solid black;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #f0f5f9;
+
+    visibility: hidden;
+}
+
+.spinner-border {
+    margin-top: 10%;
+    width: 50%;
+    height: 50%;
+
+}
+
+/* body에 들어갈 내용  */
+/* <div class="outliner"><!-- 최외곽 -->
+
+<div class="navigation"><!-- navigation -->
+    <div>
+        대전 실시간 주차장 정보 검색
+    </div>
+</div><!-- navigation -->
+
+<div class="menu"><!-- menu -->
+    <div class="menuBtn">메뉴 열기</div>
+    <div class="menuList"><!-- menuList -->
+        <div class="menuItem" id="reqBtn">데이터 갱신</div>
+        <div class="menuItem">지금 이용 가능 </div>
+        <div class="menuItem">상세검색</div>
+        <div class="menuItem">지도로 한눈에</div>
+        <div class="menuItem">통계와 그래프</div>
+
+    </div>
+</div><!-- menuList -->
+
+
+<div class="container"> <!-- container -->
+
+
+
+</div><!-- container -->
+</div><!-- 최외곽 --> */

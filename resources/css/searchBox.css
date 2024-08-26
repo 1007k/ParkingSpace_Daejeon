@@ -1,0 +1,242 @@
+/* 여기부터 지금이용가능, 상세검색 공통내용  */
+
+
+.basic {
+    width: 80%;
+    background-color: white;
+    height: 10%;
+    margin-left: 15%;
+
+}
+
+.searchBox {
+    display: flex;
+    justify-content: center;
+    background-color: #c9d6de;
+}
+
+.searchBox > div {
+    margin-left: 5%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+
+    width: 70%;
+
+    display: flex;
+    justify-content: center;
+
+    
+
+}
+
+.searchItmes{
+    background-color:#f0f5f9;
+    font-size: 20px;
+    width: 60%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.NowSearch {
+    display: flex;
+    height: 40%;
+
+}
+
+
+.NowTime {
+    display: flex;
+}
+
+.printTime{
+    display: flex;
+    width:80%;
+    /* background-color: orange; */
+    text-align: center
+    ;
+}
+
+.printTime > div{
+    width: 50%;
+}
+
+.printBox{
+    width: 80%;
+    height: 25%;
+
+    overflow: scroll;
+}
+
+
+.pleaseRead{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 5%;
+    margin-bottom: 2%;
+    height: 15%;
+}
+
+.printBox_item{
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightyellow;
+    font-size: 14px;
+
+    text-align: center;
+    
+}
+
+.printBox_item:hover{
+    background-color: #52616a ;
+    color: white;
+    cursor: pointer;
+}
+
+.No{
+    width: 5%;
+    border: 1px solid #02446d;
+}
+.Name{
+    width: 30%;
+    border: 1px solid ;
+}
+
+.adress{
+    width:35%;
+    
+}
+
+.operDay{
+    width: 15%;
+    
+}
+
+.type{
+    border: 1px solid #02446d;
+}
+.printText{
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+    
+    height: 5%;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.printTextBox{
+    display: flex;
+    font-size: 20px;
+    
+}
+
+
+.searchResult{
+    font-weight: bold;
+    color: #02446d;
+    font-size: 20px;
+
+}
+
+
+
+/* print box */
+
+.printInfo {
+    height: 55%;
+    display: flex;
+    border: 1px solid #c9d6de;
+    
+}
+
+.printInfo>div {
+
+    width: 50%;
+    height: 100%;
+}
+
+.printInfoDetail {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #52616a;
+    text-align: center;
+    font-size: 15px;
+    
+   
+}
+
+
+.printInfoMap{
+    border: 1px solid #52616a;
+
+}
+
+.title {
+    font-weight: bold;
+}
+
+.detailContents {
+    padding-top: 1%;
+    width: 100%;
+    
+    flex-wrap: wrap;
+
+
+}
+
+.detailContents>div >div {
+    padding-top: 1%;
+    border: #52616a 1px solid;
+
+}
+
+.printInfoTitle {
+    display: flex;
+    text-align: center;
+    background-color: #c9d6de;
+
+
+}
+
+.parkingAndTel {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.day {
+    display: flex;
+    width: 130%;
+
+}
+
+.dayTime{
+    width:70%;
+}
+
+.typeInfo {
+    display: flex;
+}
+
+
+.searchItmes{
+    border: 1px white solid;
+}
+
+.pleaseRead{
+    font-size: 13px;
+    font-weight: bold;
+    color: #02446d;
+
+}
+
+
+
+/* 여기까지  지금이용가능, 상세검색 공통내용  */

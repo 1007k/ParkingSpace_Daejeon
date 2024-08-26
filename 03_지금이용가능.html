@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘 운영하는 </title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"
+        integrity="sha512-HX+/SvM7094YZEKOCtG9EyjRYvK8dKlFhdYAnVCGNxMkA59BZNSZTZrqdDlLXp0O6/NjDb1uKnmutUeuzHb3iQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!-- 데이터 변환 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"
+        integrity="sha512-HX+/SvM7094YZEKOCtG9EyjRYvK8dKlFhdYAnVCGNxMkA59BZNSZTZrqdDlLXp0O6/NjDb1uKnmutUeuzHb3iQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- contianer,menu의 css  -->
+    <link rel="stylesheet" href="./resources/css/basic.css">
+
+
+    <!-- 시간, 지역에 따른 값 반환 css  -->
+    <link rel="stylesheet" href="./resources/css/searchBox.css">
+
+
+    <!-- 부트스트랩 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .printInfo {
+            height: 55%;
+            display: flex;
+
+        background-color: whitesmoke;
+        }
+
+        .printInfo>div {
+
+            width: 50%;
+            height: 100%;
+        }
+
+        .printInfoDetail {
+            display: flex;
+            flex-direction: column;
+
+            
+            text-align: center;
+        }
+
+        .title {
+            font-weight: bold;
+        }
+
+
+        .detailContents {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+
+            padding-top: 1%;
+            width: 100%;
+            
+
+        }
+
+        .detailContents>div >div {
+            padding-top: 1%;
+        
+        }
+
+        .printInfoTitle {
+            display: flex;
+
+        }
+
+        .parkingAndTel {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .day {
+            display: flex;
+            width: 130%;
+        }
+
+    
+
+        .printTime{
+            font-weight: bold;
+            color: #02446d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            font-size: 20px;
+
+            background-color: #f0f5f9;
+        }
+
+        .dayTime{
+            width:60%;
+        }
+
+        .typeInfo {
+            display: flex;
+        }
+
+        .mapBox{
+            width: 100%;
+            height: 90%;
+        }
+        .searchItmes_T{
+            background-color: #f0f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            
+            font-weight: bold;
+        }
+
+
+    
+
+    </style>
+
+</head>
+
+<body>
+    <div class="outliner"><!-- 최외곽 -->
+
+        <div class="navigation"><!-- navigation -->
+            <div>
+                대전 실시간 주차장 정보 검색
+            </div>
+        </div><!-- navigation -->
+
+        <div class="menu"><!-- menu -->
+            <div class="menuBtn">홈으로</div>
+            <div class="menuList"><!-- menuList -->
+                <div class="menuItem" onclick="f_reqData()">데이터갱신</div>
+                <div class="menuItem nowParking"> 오늘 운영 <br>주차장 </div>
+                <div class="menuItem moreSearch">상세 검색</div>
+                <div class="menuItem gotoMap">지도로<br> 한눈에</div>
+                <div class="menuItem gotoStatic">통계와 <br>그래프</div>
+                <div class="menuItem gotoInfo"> 사이트정보 <br> 사용가이드 </div>
+                
+
+            </div><!-- menuList -->
+        </div><!-- menu -->
+
+        <div class="container"> <!-- container -->
+
+            <div class="searchBox basic"><!-- searchBox -->
+
+                <div class="NowSearch"> <!-- NowSearch -->
+                    <p class="searchItmes">지역 선택 </p>
+                    <select id="" class="searchArea"> </select>
+                </div><!-- NowSearch -->
+                <div class="NowTime">
+                    <p class="searchItmes_T">기준 시간 
+                        <br>(데이터 갱신 시점)</p>
+                    <div class="printTime"> </div>
+                </div><!-- searchBox -->
+
+
+            </div> <!-- NowSearch -->
+
+            <div class="printBox basic"><!-- printBox -->
+                <!-- 조건에 맞는 데이터들 출력, 박스크기는 유지하고 스크롤로
+                클릭한 개체는 컬러 변경 등 이벤트 주고 값 반환하여 printInfo로 넘겨주기 -->
+                <div class="printBox_item"><!-- printBox_itme -->
+                    <div class="No ">No</div>
+                    <div class="Name">주차장이름</div>
+                    <div class="adress ">주차장주소</div>
+                    <div class="type ">유무료</div>
+                    <div class="operDay ">운영일</div>
+                </div><!-- printBox_itme -->
+            </div><!-- printBox -->
+
+            <div class="printText basic"> <!-- printText -->
+                <div class="printTextBox">
+                    <div class="areaBox searchResult"></div> &nbsp;지역&nbsp; <div class="weekDayBox searchResult"></div>요일
+                    에 운영중인 주차장 &nbsp;<div class="countResult searchResult"></div>&nbsp;개 검색되었습니다.
+                </div>
+
+            </div> <!-- printText -->
+
+            <div class="pleaseRead basic">
+                검색된 주차장 이름 또는 주소를 클릭하시면 하단에 상세정보 및 지도가 표시됩니다.
+                <br> 월~금 : 평일 / 토요일: 토요일 / 일요일: 휴일
+                <br> 일요일을 제외한 공휴일의 경우, 주차장별로 운영여부가 상이 할 수 있으니 개별 확인하시기 바랍니다. 
+                <br> 서구 일부 주소 데이터가 없는 경우 "월평동 513"으로 표기되니, "길찾기"를 눌러 주차장 이름으로 검색된 주소를 활용 바랍니다.
+            </div>
+            <div class="printInfo basic"> <!-- printInfo -->
+                <div class="printInfoDetail"><!-- printInfoDetail -->
+
+                </div> <!-- printInfoDetail -->
+                <div class="printInfoMap">
+                    <div id="mapBox" class="mapBox"></div>
+                    <div class="latNlon"></div> <div>길찾기</div>
+                    
+                </div>
+            </div> <!-- printInfo -->
+
+
+        </div><!-- container -->
+
+        <!-- 데이터 로딩시 프로그레스 박스  -->
+        <div class="progress-box"><!-- progress-box -->
+            <div> <br> 데이터 수신에 시간이 소요될 수 있습니다. 기다려주십시오. <br>
+                로딩이 완료된 후 새로고침해야 정상반영됩니다.
+            </div>
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden"></span>
+            
+            </div>
+        </div><!-- progress-box -->
+        
+    </div><!-- 최외곽 -->
+
+    <!-- 데이터 불러오기 -->
+    <script src="./resources/js/requestData.js"></script>
+
+    <!-- 불러온 데이터를 item만 꺼내서담기 -->
+    <script src="./resources/js/v_item.js"></script>
+
+    <!-- 메뉴 버튼의클릭이벤트-->
+    <script src="./resources/js/gotoBtn.js"></script>
+
+    <!-- 시간, 요일 불러오는 함수  -->
+    <script src="./resources/js/gettime.js"></script>
+
+    <!-- 카카오맵 불러오기  -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9fbd8df0cab54480c72a514eb019e4bc"></script>
+
+    <!-- 카카오맵 라이브러리 불러오기  -->
+    <script type="text/javascript" 
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9fbd8df0cab54480c72a514eb019e4bc&libraries=services,clusterer,drawing"></script>
+
+
+
+    <script>
+
+
+        console.log('오늘의 요일은: '+ dayOfWeek)
+
+        let v_area = ['선택하세요', '전체보기', '중구', '동구', '유성구', '대덕구', '서구']
+
+
+
+        let v_select = document.querySelector('.searchArea')
+        // let v_countSearch = 
+
+
+
+
+        for (let i = 0; i < v_area.length; i++) {
+            let v_option = '<option value="' + v_area[i] + '">' + v_area[i] + '</option>'
+            v_select.innerHTML += v_option;
+        }
+
+        let v_countResult = document.querySelector(".countResult")
+        let v_weekDayBox = document.querySelector(".weekDayBox")
+        let v_areaBox = document.querySelector(".areaBox")
+        let v_printBox = document.querySelector(".printBox")
+        let v_select_area = " "
+
+        console.log(getDayOfWeek())
+        
+
+        let v_printTime = document.querySelector(".printTime")
+        
+
+    
+        v_select.addEventListener('change', () => {
+
+            v_printBox.innerHTML = "";
+            v_printTime.innerHTML = "";
+            v_weekDayBox.innerHTML = "";
+
+            console.log(event.target.value)
+            v_select_area = event.target.value;
+
+            
+
+
+    
+
+            let no = 1;
+            for (let i = 0; i < v_item.length - 1; i++) {
+                if (v_item[i] == undefined) {
+                    continue;
+                }
+                if (v_select_area == (v_item[i]['address']).split(" ")[0] ) {
+                    let v_printItem = '<div class="printBox_item" onclick ="f_click()" id ="' + v_item[i]['name'] + '">';
+                    v_printItem += '  <div class="No">' + (no++) + '</div>';
+                    v_printItem += '  <div class="Name">' + v_item[i]['name'] + '</div>';
+
+                    v_printItem += '  <div class="adress">' + v_item[i]['address'] + '</div>';
+                    v_printItem += '  <div class="type ">' + v_item[i]['type'] + '</div>';
+                    v_printItem += '  <div class="operDay ">' + v_item[i]['operDay'] + '</div>';
+                    v_printItem += '</div>';
+
+                    v_printBox.innerHTML += v_printItem;
+
+                } else if (v_select_area == "전체보기") {
+                    let v_printItem = '<div class="printBox_item" onclick ="f_click()">';
+                    v_printItem += '  <div class="No">' + (no++) + '</div>';
+                    v_printItem += '  <div class="Name">' + v_item[i]['name'] + '</div>';
+
+                    v_printItem += '  <div class="adress">' + v_item[i]['address'] + '</div>';
+                    v_printItem += '  <div class="type ">' + v_item[i]['type'] + '</div>';
+                    v_printItem += '  <div class="operDay ">' + v_item[i]['operDay'] + '</div>';
+                    v_printItem += '</div>';
+
+                    v_printBox.innerHTML += v_printItem;
+
+
+
+                }
+            }
+
+        
+
+
+            //printBox 내용 채우기 
+            v_areaBox.innerHTML = v_select_area;
+            v_countResult.innerHTML = no - 1;
+
+            let v_time = '<div class="">' + today + '</div>';
+            v_time += '<div class="day">' + dayOfWeek + '</div>';
+
+            v_printTime.innerHTML += today;
+            v_weekDayBox.innerHTML += dayOfWeek;
+
+            // v_countSearch
+
+        })// v_select.addEventListener('change'
+
+        let operdayToday = '';
+        if(dayOfWeek=='토'){
+            operdayToday ="토요일"
+        }else if(dayOfWeek=='일'){
+            operdayToday ="휴일"
+        }else{
+            operdayToday ="평일"
+        }
+
+let v_mapBox = document.querySelector('.mapBox')
+    
+
+function f_click() {
+    let v_printInfoDetail = document.querySelector('.printInfoDetail')
+    console.log(event.target.parentElement.id)
+    let v_clickAdress = event.target.parentElement.id
+    v_printInfoDetail.innerHTML = "";
+    v_mapBox.innerHTML= "";
+    
+    
+    for (let i = 0; i < v_item.length ; i++) {
+        if (v_item[i] == undefined) {
+            continue;
+        }
+        if (v_clickAdress == v_item[i]['name'] && v_item[i]['operDay'].includes(operdayToday)){
+            let v_dtail = '<div class="printInfoTitle title"> 주차장 이름: ' + v_item[i]['name']+'<br>' +' 주소: '+ v_item[i]['address'] + ' </div>';
+                v_dtail += '      <div class="detailContents"><!-- detailContents -->';
+                v_dtail += '<div class="parkingAndTel">';
+                v_dtail += '    <div class="parkingInfo">';
+                v_dtail += '        <div class="title"> 주차정보</div>';
+                v_dtail += '        <div> 주차총면수: ' + v_item[i]['totalQty']+ '</div>';
+                v_dtail += '        <div>주차가능면수: ' + v_item[i]['resQty']+ '</div>';
+                v_dtail += '    </div><!-- parkingInfo -->';
+                v_dtail += '    <div class="tel">';
+                v_dtail += '        <div class="title">전화번호</div>';
+                v_dtail += '        <div>' + v_item[i]['tel']+ '</div>';
+                v_dtail += '    </div><!-- tel -->';
+                v_dtail += '</div><!-- parkingAndTel -->';
+                v_dtail += '<div class="operDayDetail"><!-- operDayDetail -->';
+                v_dtail += '    <div class="opredayTitle title">운영요일 및 시간 </div>';
+                v_dtail += '    <div class="day">';
+                v_dtail += '         <div>평&nbsp;&nbsp;&nbsp;일</div> <div class="dayTime"><div>오픈:' + v_item[i]['weekdayOpenTime']+ '</div><div>종료:' + v_item[i]['weekdayCloseTime']+ '</div></div>';
+                v_dtail += '    </div>';
+                v_dtail += '    <div class="day">';
+                v_dtail += '        <div>토요일</div> <div class="dayTime"><div>오픈:' + v_item[i]['satOpenTime']+ '</div><div>종료:' + v_item[i]['satCloseTime']+ '</div></div>';
+                v_dtail += '    </div>';
+                v_dtail += '    <div class="day">';
+                v_dtail += '        <div>공휴일</div> <div class="dayTime"><div>오픈:' + v_item[i]['holidayOpenTime']+ '</div><div>종료:' + v_item[i]['holidayCloseTime']+ '</div></div>';
+                v_dtail += '    </div>';
+                v_dtail += '</div><!-- operDayDetail -->';
+
+                v_dtail += '<div class="typeDetail"><!-- typeDetail -->';
+                v_dtail += '    <div class="typeTitle title">' + v_item[i]['type']+ '</div>';
+                v_dtail += '     <div class="typeInfo">';
+                v_dtail += '        <div class="basetype">';
+                v_dtail += '            <div class="baseTime">기본시간:  ' + v_item[i]['baseTime']+ ' (분)</div>';
+                v_dtail += '            <div class="baseRate">기본요금:  ' + v_item[i]['baseRate']+ ' (원)</div>';
+                v_dtail += '        </div>';
+                v_dtail += '        <div class="addtype">';
+                v_dtail += '            <div class="addTime">추가단위  ' + v_item[i]['addTime']+ ' (분)</div>';
+                v_dtail += '            <div class="addRate">추가요금  ' + v_item[i]['addRate']+ ' (원)</div>';
+                v_dtail += '        </div>';
+                v_dtail += '        <div class="extratype">';
+                v_dtail += '            <div class="baseTime">할증시간: ' + v_item[i]['extraBaseTime']+ ' (분)</div>';
+                v_dtail += '            <div class="baseTime">할증단위시간:  ' + v_item[i]['extraAddTime']+ ' (분당)</div>';
+                v_dtail += '            <div class="baseRate">할증단위요금: ' + v_item[i]['extraAddRate']+ ' (원)</div>';
+                v_dtail += '        </div>';
+
+                v_dtail += '    </div>';
+                v_dtail += '</div><!-- typeDetail -->';
+                v_dtail += '</div><!-- detailContents -->';
+
+            v_printInfoDetail.innerHTML += v_dtail;
+
+            // 지도
+            let options = {//지도를 생성할 때 필요한 기본 옵션
+                    center: new kakao.maps.LatLng(v_item[i]['lat'], v_item[i]['lon']),//지도의 중심좌표.
+                    level: 3 //지도의 레벨(확대, 축소 정도)
+                };
+
+            let map = new kakao.maps.Map(v_mapBox, options);//지도 생성 및 객체 리턴
+
+            var markerPosition  = new kakao.maps.LatLng(v_item[i]['lat'], v_item[i]['lon']);
+            var marker = new kakao.maps.Marker({
+                    position: markerPosition
+                });
+
+                marker.setMap(map);
+
+
+
+    
+            }
+        }
+
+    }   
+    </script>
+
+
+
+
+</html>
